@@ -115,3 +115,45 @@ document.querySelector('.nav__links').addEventListener("click",function(e){
     });
   }
 })
+
+const tabs=document.querySelectorAll('.operations__tab');
+const tabsContainer=document.querySelector('.operations__tab-container');
+const tabsContent=document.querySelectorAll(".operations__content");
+
+tabsContainer.addEventListener("click",function(e){
+  // console.log(e.target.closest('.operations__tab'));
+  const clicked=e.target.closest('.operations__tab');
+  console.log(clicked);
+
+  //Guard Clause
+  if(!clicked) return;
+
+  //Active tab
+  tabs.forEach(tab=>tab.classList.remove('operations__tab--active'));
+  clicked.classList.add('operations__tab--active');
+
+  //Active content
+  console.log(clicked.dataset.tab);
+  document.querySelector(`.operations__content--${clicked.dataset.tab}`).classList.add('operations__content--active');
+})
+
+
+
+
+
+//DOM traversing
+const h1=document.querySelector('h1');
+
+//Going downwards: child
+// console.log(h1.querySelectorAll('.highlight'));
+// console.log(h1.childNodes);
+// console.log(h1.children);
+// console.log(h1.firstElementChild);
+// console.log(h1.lastElementChild);
+// h1.firstElementChild.style.color="white";
+// h1.lastElementChild.style.color="orangered";
+
+//Going Upward: parent
+// console.log(h1.parentNode);
+// console.log(h1.closest('.header'));
+// h1.closest('.header').style.background='var(--gradient-primary)';
