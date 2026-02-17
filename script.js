@@ -109,7 +109,7 @@ document.querySelector('.nav__links').addEventListener("click",function(e){
 
   if(e.target.classList.contains('nav__link')){
     const id=e.target.getAttribute('href');
-    console.log(id);
+    // console.log(id);
     document.querySelector(id).scrollIntoView({
       behavior:'smooth'
     });
@@ -123,19 +123,51 @@ const tabsContent=document.querySelectorAll(".operations__content");
 tabsContainer.addEventListener("click",function(e){
   // console.log(e.target.closest('.operations__tab'));
   const clicked=e.target.closest('.operations__tab');
-  console.log(clicked);
+  // console.log(clicked);
 
   //Guard Clause
   if(!clicked) return;
 
-  //Active tab
+  //remove active classes
   tabs.forEach(tab=>tab.classList.remove('operations__tab--active'));
+  tabsContent.forEach(c=>c.classList.remove("operations__content--active"));
+
+  //Active tab
   clicked.classList.add('operations__tab--active');
 
   //Active content
-  console.log(clicked.dataset.tab);
+  // console.log(clicked.dataset.tab);
   document.querySelector(`.operations__content--${clicked.dataset.tab}`).classList.add('operations__content--active');
 })
+
+//Menu fade animation
+const nav=document.querySelector(".nav");
+
+
+function handleHover(e,opacity){
+  if(e.target.classList.contains('nav__link')){
+    const link=e.target;
+    // console.log(link);
+    const siblings=link.closest('.nav').querySelectorAll('.nav__link');
+    const logo=link.closest('.nav').querySelector('img');
+
+    siblings.forEach(el=>{
+      if(el!==link) el.style.opacity=this;
+    });
+    logo.style.opacity=this;
+  }
+}
+
+// nav.addEventListener('mouseover',function(e){
+//  handleHover(e,0.5);
+// });
+
+nav.addEventListener('mouseover',handleHover.bind(0.5));
+
+// nav.addEventListener('mouseout',function(e){
+// handleHover(e,1);
+// });
+nav.addEventListener('mouseout',handleHover.bind(1));
 
 
 
